@@ -176,7 +176,7 @@ const ContactSection = () => {
                           htmlFor="name"
                           className="text-white font-medium"
                         >
-                          Nombre *
+                          Nombre <span className="text-red-500">*</span>
                         </Label>
                         <Input
                           id="name"
@@ -195,7 +195,7 @@ const ContactSection = () => {
                           htmlFor="email"
                           className="text-white font-medium"
                         >
-                          Email *
+                          Email <span className="text-red-500">*</span>
                         </Label>
                         <Input
                           id="email"
@@ -249,7 +249,7 @@ const ContactSection = () => {
                         htmlFor="message"
                         className="text-white font-medium"
                       >
-                        Cuéntanos tu idea *
+                        Cuéntanos tu idea <span className="text-red-500">*</span>
                       </Label>
                       <Textarea
                         id="message"
