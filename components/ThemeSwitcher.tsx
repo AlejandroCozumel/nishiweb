@@ -26,7 +26,7 @@ export function ThemeSwitcher() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative w-10 h-10 rounded-lg bg-mewtwo-primary/20 hover:bg-mewtwo-primary/30 transition-all duration-300 flex items-center justify-center group overflow-hidden"
+      className="cursor-pointer relative w-10 h-10 rounded-lg bg-mewtwo-primary/20 hover:bg-mewtwo-primary/30 transition-all duration-300 flex items-center justify-center group overflow-hidden"
       aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} theme`}
       title={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} theme`}
     >
