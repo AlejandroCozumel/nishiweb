@@ -27,11 +27,23 @@ import {
   buttonAnimations,
 } from "@/hooks/useFramerAnimations";
 
+interface JobPosition {
+  id: number;
+  category: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  highlight: string;
+  details: string;
+  image: string;
+  logo: React.ComponentType<{ size?: number; className?: string }>;
+}
+
 const CareersSection = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const jobPositions = [
+  const jobPositions: JobPosition[] = [
     {
       id: 1,
       category: "web",
@@ -99,7 +111,7 @@ const CareersSection = () => {
     },
   ];
 
-  const handleJobClick = (job) => {
+  const handleJobClick = (job: JobPosition) => {
     console.log("Job clicked:", job);
     // Handler for future implementation
   };
