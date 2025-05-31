@@ -139,7 +139,7 @@ const ProjectsSection = () => {
       : projects.filter((project) => project.category === activeCategory);
 
   return (
-    <section className="relative pb-12 sm:pb-16 lg:pb-24 bg-mewtwo-accent overflow-hidden">
+    <section id="proyectos" className="relative pb-16 sm:pb-20 lg:pb-32 bg-mewtwo-accent overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           {/* Section Header */}

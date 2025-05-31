@@ -194,6 +194,12 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* Account for sticky navbar height (h-16 = 4rem) + extra spacing */
+  }
+
   body {
     @apply bg-background text-foreground;
   }

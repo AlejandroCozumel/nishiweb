@@ -113,7 +113,7 @@ const CareersSection = () => {
   };
 
   return (
-    <section className="relative pb-16 sm:pb-20 lg:pb-32 bg-mewtwo-accent overflow-hidden">
+    <section id="carreras" className="relative pb-16 sm:pb-20 lg:pb-32 bg-mewtwo-accent overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-12 lg:space-y-16">
           {/* Header */}

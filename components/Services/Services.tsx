@@ -97,7 +97,7 @@ const ServicesSection = () => {
   };
 
   return (
-    <section className="relative pb-12 sm:pb-16 lg:pb-24 bg-mewtwo-accent overflow-hidden">
+    <section id="servicios" className="relative pb-12 sm:pb-16 lg:pb-24 bg-mewtwo-accent overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
         {[...Array(15)].map((_, i) => (

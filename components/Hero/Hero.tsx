@@ -43,7 +43,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-mewtwo-accent via-mewtwo-accent/90 to-mewtwo-dark overflow-hidden">
+    <section id="inicio" className="relative min-h-screen bg-gradient-to-br from-mewtwo-accent via-mewtwo-accent/90 to-mewtwo-dark overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <motion.div

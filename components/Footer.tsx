@@ -12,11 +12,11 @@ import {
 
 export function Footer() {
   const navigationLinks = [
-    { label: 'Metodología', href: '/metodologia' },
-    { label: 'Servicios', href: '/servicios' },
-    { label: 'Proyectos', href: '/proyectos' },
-    { label: 'Nosotros', href: '/nosotros' },
-    { label: 'Contáctanos', href: '/contactanos' }
+    { label: 'Metodología', href: '#metodologia' },
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Proyectos', href: '#proyectos' },
+    { label: 'Nosotros', href: '#nosotros' },
+    { label: 'Contáctanos', href: '#contactanos' }
   ];
 
   const contactInfo = [
@@ -54,7 +54,7 @@ export function Footer() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {/* Company Info */}
           <div className="space-y-2 lg:space-y-4">
-            <Link href="/" className="flex items-center space-x-2 group">
+            <Link href="#inicio" className="flex items-center space-x-2 group">
               <div className="w-8 h-8 lg:w-10 lg:h-10 bg-mewtwo-primary rounded-lg flex items-center justify-center group-hover:bg-mewtwo-secondary transition-all duration-300 group-hover:scale-110">
                 <div className="w-6 h-6 lg:w-7 lg:h-7 bg-white rounded-md flex items-center justify-center">
                   <span className="text-mewtwo-primary font-bold text-sm lg:text-base">N</span>

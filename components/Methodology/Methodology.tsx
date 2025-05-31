@@ -47,7 +47,7 @@ const MethodologySection = () => {
   ];
 
   return (
-    <section className="relative py-12 sm:py-16 lg:py-24 bg-mewtwo-accent overflow-hidden">
+    <section id="metodologia" className="relative py-12 sm:py-16 lg:py-24 bg-mewtwo-accent overflow-hidden">
       {/* Background Pattern - Reduced for mobile */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-full h-full">

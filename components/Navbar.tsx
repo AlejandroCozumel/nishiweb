@@ -11,11 +11,11 @@ import { ThemeSwitcher, ThemeSwitcherCompact } from '@/components/ThemeSwitcher'
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const navItems = [
-    { label: 'Metodología', href: '/metodologia' },
-    { label: 'Servicios', href: '/servicios' },
-    { label: 'Proyectos', href: '/proyectos' },
-    { label: 'Nosotros', href: '/nosotros' },
-    { label: 'Contáctanos', href: '/contactanos', isButton: true }
+    { label: 'Metodología', href: '#metodologia' },
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Proyectos', href: '#proyectos' },
+    { label: 'Nosotros', href: '#nosotros' },
+    { label: 'Contáctanos', href: '#contactanos', isButton: true }
   ];
 
   return (
@@ -23,7 +23,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link href="#inicio" className="flex items-center space-x-3 group">
             <div className="w-10 h-10 bg-mewtwo-primary rounded-lg flex items-center justify-center group-hover:bg-mewtwo-secondary transition-colors duration-300">
               <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center">
                 <span className="text-mewtwo-primary font-bold text-sm">N</span>
