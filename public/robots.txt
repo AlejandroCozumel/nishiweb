@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://nishi.dev/sitemap.xml
+
+# Disallow crawling of private/admin areas (if any)
+Disallow: /admin/
+Disallow: /api/private/
+Disallow: /_next/
+Disallow: /404/
+
+# Allow social media crawlers
+User-agent: facebookexternalhit/*
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Crawl delay (optional - in seconds)
+Crawl-delay: 1
