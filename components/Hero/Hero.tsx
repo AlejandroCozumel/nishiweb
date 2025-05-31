@@ -1,11 +1,85 @@
 "use client";
 
 import React from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
 import { ArrowRight, Play, Sparkles, Star, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ProjectCard } from "@/components/Hero/ProjectCard";
 
+// TypeScript Interfaces
+interface MockProject {
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+}
+
+interface AnimationVariants {
+  hidden: {
+    opacity: number;
+    y?: number;
+  };
+  visible: {
+    opacity: number;
+    y?: number;
+    transition: {
+      duration: number;
+      delay?: number;
+    };
+  };
+}
+
+interface ContainerVariants {
+  hidden: {
+    opacity: number;
+  };
+  visible: {
+    opacity: number;
+    transition: {
+      staggerChildren: number;
+      delayChildren: number;
+    };
+  };
+}
+
+interface GradientTextAnimation {
+  animate: {
+    backgroundPosition: string[];
+  };
+  transition: {
+    duration: number;
+    repeat: number;
+    ease: string;
+  };
+}
+
+interface ArrowAnimationProps {
+  animate: {
+    x: number[];
+  };
+  transition: {
+    duration: number;
+    repeat: number;
+  };
+}
+
+interface ButtonAnimationProps {
+  whileHover: {
+    scale: number;
+  };
+  whileTap: {
+    scale: number;
+  };
+}
+
+interface ProjectCardProps {
+  project: MockProject;
+  index: number;
+  position: number;
+}
+
+// Animation configurations with proper typing
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -36,7 +110,7 @@ const textAnimationVariants = {
   },
 };
 
-const gradientTextAnimation = {
+const gradientTextAnimation: Record<string, GradientTextAnimation> = {
   primary: {
     animate: { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] },
     transition: { duration: 5, repeat: Infinity, ease: "linear" },
@@ -47,22 +121,22 @@ const gradientTextAnimation = {
   },
 };
 
-const arrowAnimation = {
+const arrowAnimation: ArrowAnimationProps = {
   animate: { x: [0, 5, 0] },
   transition: { duration: 1.5, repeat: Infinity },
 };
 
-const buttonAnimations = {
+const buttonAnimations: Record<string, ButtonAnimationProps> = {
   primary: { whileHover: { scale: 1.05 }, whileTap: { scale: 0.98 } },
   secondary: { whileHover: { scale: 1.05 }, whileTap: { scale: 0.98 } },
 };
 
-export default function HeroSection() {
-  const heroRef = React.useRef(null);
-  const isHeroInView = useInView(heroRef, { once: true });
+export default function HeroSection(): React.ReactElement {
+  const heroRef = React.useRef<HTMLDivElement>(null);
+  const isHeroInView: boolean = useInView(heroRef, { once: true });
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
-  const mockProjects = [
+  const mockProjects: MockProject[] = [
     {
       title: "E-commerce Platform",
       description: "Plataforma completa de comercio electrónico",
@@ -99,7 +173,7 @@ export default function HeroSection() {
     setCurrentIndex((prev) => (prev + 1) % mockProjects.length);
   };
 
-  const getCardPosition = (index) => {
+  const getCardPosition = (index: number): number => {
     const diff = index - currentIndex;
     const totalCards = mockProjects.length;
 
@@ -109,7 +183,11 @@ export default function HeroSection() {
     return diff;
   };
 
-  const ProjectCard = ({ project, index, position }) => {
+  const ProjectCardComponent: React.FC<ProjectCardProps> = ({
+    project,
+    index,
+    position
+  }) => {
     const isCenter = position === 0;
 
     return (
@@ -416,7 +494,7 @@ export default function HeroSection() {
               {mockProjects.map((project, index) => {
                 const position = getCardPosition(index);
                 return (
-                  <ProjectCard
+                  <ProjectCardComponent
                     key={index}
                     project={project}
                     index={index}
