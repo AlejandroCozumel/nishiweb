@@ -1,16 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { motion, useInView } from "framer-motion";
-import {
-  Monitor,
-  ShoppingCart,
-  Smartphone,
-  Settings,
-  Eye,
-  ExternalLink,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { Monitor, ShoppingCart, Smartphone, Settings, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -20,7 +11,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import {
-  containerVariants,
   gradientTextAnimation,
   methodologyAnimations,
   buttonAnimations,
@@ -28,8 +18,6 @@ import {
 
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const projectCategories = [
     {
@@ -152,83 +140,33 @@ const ProjectsSection = () => {
 
   return (
     <section className="relative pb-12 sm:pb-16 lg:pb-24 bg-mewtwo-accent overflow-hidden">
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute top-0 left-0 w-96 h-96 bg-mewtwo-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
-        />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute bottom-0 right-0 w-80 h-80 bg-mewtwo-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"
-        />
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="text-center mb-8 sm:mb-12 lg:mb-16"
-        >
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           {/* Section Header */}
-          <motion.div
-            variants={methodologyAnimations.stepCard}
-            className="mb-6 sm:mb-8"
-          >
+          <div className="mb-6 sm:mb-8">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6">
               <span className="text-white">Proyectos </span>
-              <motion.span
-                {...gradientTextAnimation.primary}
-                className="bg-gradient-to-r from-mewtwo-primary via-mewtwo-secondary to-mewtwo-primary bg-[length:200%_100%] bg-clip-text text-transparent"
-              >
+              <span className="bg-gradient-to-r from-mewtwo-primary via-mewtwo-secondary to-mewtwo-primary bg-[length:200%_100%] bg-clip-text text-transparent">
                 realizados
-              </motion.span>
+              </span>
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.p
-            variants={methodologyAnimations.stepCard}
-            className="text-lg sm:text-xl text-mewtwo-light max-w-5xl mx-auto leading-relaxed px-4"
-          >
+          <p className="text-lg sm:text-xl text-mewtwo-light max-w-5xl mx-auto leading-relaxed px-4">
             Cada proyecto que desarrollamos es una prueba de que las buenas
             ideas no duermen. Trabajamos de cerca con visionarios que
             necesitaban soluciones reales, hechas a medida, y las transformamos
             en plataformas sólidas, intuitivas y listas para escalar.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Project Categories - Now clickable filters */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mb-12 sm:mb-16 lg:mb-20"
-        >
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mb-12 sm:mb-16 lg:mb-20">
           {projectCategories.map((category, index) => (
-            <motion.button
+            <button
               key={category.id}
-              variants={methodologyAnimations.stepCard}
-              whileHover={methodologyAnimations.stepCardHover}
               onClick={() => setActiveCategory(category.id)}
-              className={`bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border transition-all duration-500 text-center group ${
+              className={`cursor-pointer bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border transition-all duration-500 text-center group ${
                 activeCategory === category.id
                   ? "border-mewtwo-secondary/60 bg-mewtwo-primary/10"
                   : "border-mewtwo-primary/20 hover:border-mewtwo-secondary/40"
@@ -267,17 +205,12 @@ const ProjectsSection = () => {
               >
                 {category.description}
               </p>
-            </motion.button>
+            </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Projects Carousel */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="relative"
-        >
+        <div className="relative">
           <Carousel
             key={activeCategory} // Force re-render when category changes
             opts={{
@@ -399,7 +332,7 @@ const ProjectsSection = () => {
               </p>
             </motion.div>
           )}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

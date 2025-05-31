@@ -87,47 +87,10 @@ const ContactSection = () => {
   return (
     <>
       <section className="relative pb-16 sm:pb-20 lg:pb-32 bg-mewtwo-accent overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="absolute top-0 left-0 w-96 h-96 bg-mewtwo-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
-          />
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
-              rotate: [360, 180, 0],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="absolute bottom-0 right-0 w-80 h-80 bg-mewtwo-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"
-          />
-        </div>
-
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            ref={ref}
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="space-y-12 lg:space-y-16"
-          >
+          <div className="space-y-12 lg:space-y-16">
             {/* Header */}
-            <motion.div
-              variants={methodologyAnimations.stepCard}
-              className="text-center max-w-4xl mx-auto"
-            >
+            <div className="text-center max-w-4xl mx-auto">
               {/* Logo placeholder */}
               <motion.div
                 whileHover={{ scale: 1.05, rotate: -5 }}
@@ -146,15 +109,12 @@ const ContactSection = () => {
                   Crea tu proyecto con NISHI
                 </motion.span>
               </h2>
-            </motion.div>
+            </div>
 
             {/* Main Content */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Left side - Contact Form */}
-              <motion.div
-                variants={methodologyAnimations.stepCard}
-                className="relative"
-              >
+              <div className="relative">
                 <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border border-mewtwo-primary/20 hover:border-mewtwo-secondary/40 transition-all duration-500">
                   <div className="mb-8">
                     <motion.h3
@@ -249,7 +209,8 @@ const ContactSection = () => {
                         htmlFor="message"
                         className="text-white font-medium"
                       >
-                        Cuéntanos tu idea <span className="text-red-500">*</span>
+                        Cuéntanos tu idea{" "}
+                        <span className="text-red-500">*</span>
                       </Label>
                       <Textarea
                         id="message"
@@ -281,7 +242,7 @@ const ContactSection = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Right side - Contact Info & CTA */}
               <div className="space-y-8">
@@ -404,7 +365,7 @@ const ContactSection = () => {
                 </motion.div>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 

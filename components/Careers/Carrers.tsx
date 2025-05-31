@@ -2,8 +2,6 @@
 import React from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  ChevronLeft,
-  ChevronRight,
   Briefcase,
   Users,
   Code,
@@ -21,9 +19,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import {
-  containerVariants,
   gradientTextAnimation,
-  methodologyAnimations,
   buttonAnimations,
 } from "@/hooks/useFramerAnimations";
 
@@ -118,47 +114,10 @@ const CareersSection = () => {
 
   return (
     <section className="relative pb-16 sm:pb-20 lg:pb-32 bg-mewtwo-accent overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0">
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 90, 180],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-mewtwo-primary/5 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1.1, 1, 1.1],
-            rotate: [180, 90, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-mewtwo-secondary/5 rounded-full blur-3xl"
-        />
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="space-y-12 lg:space-y-16"
-        >
+        <div className="space-y-12 lg:space-y-16">
           {/* Header */}
-          <motion.div
-            variants={methodologyAnimations.stepCard}
-            className="text-center max-w-4xl mx-auto"
-          >
+          <div className="text-center max-w-4xl mx-auto">
             {/* Logo placeholder */}
             <motion.div
               whileHover={{ scale: 1.05, rotate: 5 }}
@@ -180,15 +139,10 @@ const CareersSection = () => {
             <p className="text-lg sm:text-xl text-mewtwo-light leading-relaxed italic">
               Donde el talento se convierte en impacto.
             </p>
-          </motion.div>
+          </div>
 
           {/* Jobs Carousel */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="relative"
-          >
+          <div className="relative">
             <Carousel
               opts={{
                 align: "start",
@@ -295,7 +249,7 @@ const CareersSection = () => {
                               className="w-full"
                             >
                               <span>Hablemos de tu idea</span>
-                              <motion.div  {...buttonAnimations.primary}>
+                              <motion.div {...buttonAnimations.primary}>
                                 <ArrowRight size={20} />
                               </motion.div>
                             </Button>
@@ -313,8 +267,8 @@ const CareersSection = () => {
                 <CarouselNext className="relative inset-auto translate-y-0 bg-mewtwo-primary/20 border-mewtwo-primary/30 hover:bg-mewtwo-primary/30 text-mewtwo-secondary hover:text-white" />
               </div>
             </Carousel>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

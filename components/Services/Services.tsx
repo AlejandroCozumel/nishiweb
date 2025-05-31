@@ -1,29 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Monitor,
   Smartphone,
   Search,
   Settings,
   Check,
-  ArrowRight,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  containerVariants,
-  gradientTextAnimation,
-  methodologyAnimations,
-  buttonAnimations,
-  arrowAnimation,
-} from "@/hooks/useFramerAnimations";
+import { gradientTextAnimation } from "@/hooks/useFramerAnimations";
 
 const ServicesSection = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const services = [
     {
@@ -110,18 +101,9 @@ const ServicesSection = () => {
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
         {[...Array(15)].map((_, i) => (
-          <motion.div
+          <div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full"
-            animate={{
-              opacity: [0.3, 1, 0.3],
-              scale: [1, 1.5, 1],
-            }}
-            transition={{
-              duration: Math.random() * 4 + 3,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -131,45 +113,25 @@ const ServicesSection = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="text-center mb-8 sm:mb-12 lg:mb-16"
-        >
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           {/* Section Header */}
-          <motion.div
-            variants={methodologyAnimations.stepCard}
-            className="mb-6 sm:mb-8"
-          >
+          <div className="mb-6 sm:mb-8">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6">
               <span className="text-white">Servicios</span>
               <br />
-              <motion.span
-                {...gradientTextAnimation.primary}
-                className="bg-gradient-to-r from-mewtwo-primary via-mewtwo-secondary to-mewtwo-primary bg-[length:200%_100%] bg-clip-text text-transparent"
-              >
+              <span className="bg-gradient-to-r from-mewtwo-primary via-mewtwo-secondary to-mewtwo-primary bg-[length:200%_100%] bg-clip-text text-transparent">
                 Hechos a medida
-              </motion.span>
+              </span>
             </h2>
-          </motion.div>
-          <motion.p
-            variants={methodologyAnimations.stepCard}
-            className="text-lg sm:text-xl text-mewtwo-light max-w-4xl mx-auto leading-relaxed px-4"
-          >
+          </div>
+          <p className="text-lg sm:text-xl text-mewtwo-light max-w-4xl mx-auto leading-relaxed px-4">
             Creamos productos que resuelven problemas y brindan una experiencia
             humana, adaptada a las necesidades específicas de cada cliente.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Tabs Navigation */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="relative mb-8 sm:mb-12"
-        >
+        <div className="relative mb-8 sm:mb-12">
           {/* Mobile Scroll Buttons */}
           <div className="flex sm:hidden items-center mb-4">
             <Button
@@ -197,9 +159,8 @@ const ServicesSection = () => {
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {services.map((service, index) => (
-              <motion.button
+              <button
                 key={service.id}
-                variants={methodologyAnimations.stepCard}
                 onClick={() => setActiveTab(index)}
                 className={`cursor-pointer flex items-center space-x-2 sm:space-x-3 px-4 sm:px-6 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base whitespace-nowrap transition-all duration-300 ${
                   activeTab === index
@@ -209,18 +170,13 @@ const ServicesSection = () => {
               >
                 <service.icon size={18} className="sm:w-5 sm:h-5" />
                 <span>{service.title}</span>
-              </motion.button>
+              </button>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Tab Content */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="relative"
-        >
+        <div className="relative">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
@@ -350,7 +306,7 @@ const ServicesSection = () => {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

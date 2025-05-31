@@ -54,7 +54,7 @@ export function Navbar() {
             </div>
 
             {/* Theme Switcher for Desktop */}
-            <ThemeSwitcher />
+            {/* <ThemeSwitcher /> */}
           </div>
 
           {/* Mobile menu button and theme switcher */}

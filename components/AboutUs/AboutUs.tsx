@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ChevronRight,
   ChevronLeft,
@@ -12,17 +12,9 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import {
-  containerVariants,
-  gradientTextAnimation,
-  methodologyAnimations,
-  buttonAnimations,
-} from "@/hooks/useFramerAnimations";
+import { methodologyAnimations } from "@/hooks/useFramerAnimations";
 
 const AboutUsSection = () => {
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   const values = [
     { icon: Heart, text: "Compromiso" },
     { icon: Shield, text: "Estética funcional" },
@@ -32,55 +24,15 @@ const AboutUsSection = () => {
 
   return (
     <section className="relative pb-16 sm:pb-20 lg:pb-32 bg-mewtwo-accent overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0">
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 90, 180],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-mewtwo-primary/5 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1.1, 1, 1.1],
-            rotate: [180, 90, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-mewtwo-secondary/5 rounded-full blur-3xl"
-        />
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="space-y-12 lg:space-y-16"
-        >
+        <div className="space-y-12 lg:space-y-16">
           {/* Header */}
-          <motion.div
-            variants={methodologyAnimations.stepCard}
-            className="text-center max-w-3xl mx-auto"
-          >
+          <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
               <span className="text-white">Conoce sobre </span>
-              <motion.span
-                {...gradientTextAnimation.primary}
-                className="bg-gradient-to-r from-mewtwo-primary via-mewtwo-secondary to-mewtwo-primary bg-[length:200%_100%] bg-clip-text text-transparent"
-              >
+              <span className="bg-gradient-to-r from-mewtwo-primary via-mewtwo-secondary to-mewtwo-primary bg-[length:200%_100%] bg-clip-text text-transparent">
                 Nosotros
-              </motion.span>
+              </span>
             </h2>
             <p className="text-lg sm:text-xl text-mewtwo-light max-w-5xl mx-auto leading-relaxed px-4">
               Somos tecnología que nunca duerme.
@@ -92,20 +44,15 @@ const AboutUsSection = () => {
               tu equipo. Apostamos por procesos claros, código limpio y un
               soporte humano real.
             </p>
-          </motion.div>
+          </div>
 
           {/* Main content grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left side - Who we are */}
-            <motion.div
-              variants={methodologyAnimations.stepCard}
-              className="relative"
-            >
+            <div className="relative">
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 border border-mewtwo-primary/20 hover:border-mewtwo-secondary/40 transition-all duration-500 relative overflow-hidden group">
                 {/* Decorative elements */}
-                <div
-                  className="absolute top-4 right-4 w-12 h-12 border border-mewtwo-primary/30 rounded-lg flex items-center justify-center group-hover:border-mewtwo-secondary/50 transition-colors duration-300"
-                >
+                <div className="absolute top-4 right-4 w-12 h-12 border border-mewtwo-primary/30 rounded-lg flex items-center justify-center group-hover:border-mewtwo-secondary/50 transition-colors duration-300">
                   <Star className="w-6 h-6 text-mewtwo-primary group-hover:text-mewtwo-secondary transition-colors duration-300" />
                 </div>
 
@@ -140,19 +87,14 @@ const AboutUsSection = () => {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Right side - Mission & Vision */}
             <div className="space-y-8">
               {/* Mission */}
-              <motion.div
-                variants={methodologyAnimations.stepCard}
-                className="relative"
-              >
+              <div className="relative">
                 <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 border border-mewtwo-secondary/20 hover:border-mewtwo-primary/40 transition-all duration-500 relative overflow-hidden group">
-                  <div
-                    className="absolute top-4 right-4 w-12 h-12 border border-mewtwo-secondary/30 rounded-lg flex items-center justify-center group-hover:border-mewtwo-primary/50 transition-colors duration-300"
-                  >
+                  <div className="absolute top-4 right-4 w-12 h-12 border border-mewtwo-secondary/30 rounded-lg flex items-center justify-center group-hover:border-mewtwo-primary/50 transition-colors duration-300">
                     <Target className="w-6 h-6 text-mewtwo-secondary group-hover:text-mewtwo-primary transition-colors duration-300" />
                   </div>
 
@@ -178,17 +120,12 @@ const AboutUsSection = () => {
                     los negocios a crecer con confianza e innovación.
                   </p>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Vision */}
-              <motion.div
-                variants={methodologyAnimations.stepCard}
-                className="relative"
-              >
+              <div className="relative">
                 <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 border border-mewtwo-primary/20 hover:border-mewtwo-secondary/40 transition-all duration-500 relative overflow-hidden group">
-                  <div
-                    className="absolute top-4 right-4 w-12 h-12 border border-mewtwo-primary/30 rounded-lg flex items-center justify-center group-hover:border-mewtwo-secondary/50 transition-colors duration-300"
-                  >
+                  <div className="absolute top-4 right-4 w-12 h-12 border border-mewtwo-primary/30 rounded-lg flex items-center justify-center group-hover:border-mewtwo-secondary/50 transition-colors duration-300">
                     <Zap className="w-6 h-6 text-mewtwo-primary group-hover:text-mewtwo-secondary transition-colors duration-300" />
                   </div>
 
@@ -214,19 +151,14 @@ const AboutUsSection = () => {
                     sus ideas en soluciones digitales únicas.
                   </p>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
 
           {/* Values section */}
-          <motion.div
-            variants={methodologyAnimations.stepCard}
-            className="relative"
-          >
+          <div className="relative">
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-mewtwo-primary/20 hover:border-mewtwo-secondary/40 transition-all duration-500 relative overflow-hidden group">
-              <div
-                className="absolute top-6 right-6 w-16 h-16 border border-mewtwo-primary/30 rounded-xl flex items-center justify-center group-hover:border-mewtwo-secondary/50 transition-colors duration-300"
-              >
+              <div className="absolute top-6 right-6 w-16 h-16 border border-mewtwo-primary/30 rounded-xl flex items-center justify-center group-hover:border-mewtwo-secondary/50 transition-colors duration-300">
                 <Heart className="w-8 h-8 text-mewtwo-primary group-hover:text-mewtwo-secondary transition-colors duration-300" />
               </div>
 
@@ -254,19 +186,6 @@ const AboutUsSection = () => {
                 {values.map((value, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={
-                      isInView
-                        ? {
-                            opacity: 1,
-                            y: 0,
-                            transition: {
-                              delay: 0.8 + index * 0.1,
-                              duration: 0.5,
-                            },
-                          }
-                        : {}
-                    }
                     whileHover={{
                       scale: 1.05,
                       transition: { type: "spring", stiffness: 400 },
@@ -287,8 +206,8 @@ const AboutUsSection = () => {
                 </p>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

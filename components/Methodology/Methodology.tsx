@@ -1,7 +1,4 @@
-"use client";
-
 import React from "react";
-import { motion, useInView } from "framer-motion";
 import {
   MessageCircle,
   Lightbulb,
@@ -12,18 +9,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  containerVariants,
-  gradientTextAnimation,
-  methodologyAnimations,
-  buttonAnimations,
-  arrowAnimation,
-} from "@/hooks/useFramerAnimations";
 
 const MethodologySection = () => {
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   const steps = [
     {
       number: "01",
@@ -65,18 +52,9 @@ const MethodologySection = () => {
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-full h-full">
           {[...Array(10)].map((_, i) => (
-            <motion.div
+            <div
               key={i}
               className="absolute w-1 h-1 bg-white rounded-full"
-              animate={{
-                opacity: [0.2, 0.8, 0.2],
-                scale: [1, 1.5, 1],
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -90,57 +68,29 @@ const MethodologySection = () => {
       <div className="hidden lg:block absolute left-1/2 top-0 w-px h-full bg-gradient-to-b from-transparent via-mewtwo-primary/30 to-transparent transform -translate-x-1/2" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="text-center mb-8 sm:mb-12 lg:mb-16"
-        >
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           {/* Section Header */}
-          <motion.div
-            variants={methodologyAnimations.stepCard}
-            className="mb-6 sm:mb-8"
-          >
+          <div className="mb-6 sm:mb-8">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6">
               <span className="text-white">Metodología </span>
-              <motion.span
-                {...gradientTextAnimation.primary}
-                className="bg-gradient-to-r from-mewtwo-primary via-mewtwo-secondary to-mewtwo-primary bg-[length:200%_100%] bg-clip-text text-transparent"
-              >
+              <span className="bg-gradient-to-r from-mewtwo-primary via-mewtwo-secondary to-mewtwo-primary bg-[length:200%_100%] bg-clip-text text-transparent">
                 Nishi
-              </motion.span>
+              </span>
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.p
-            variants={methodologyAnimations.stepCard}
-            className="text-lg sm:text-xl text-mewtwo-light max-w-4xl mx-auto mb-2 sm:mb-4 leading-relaxed px-4"
-          >
+          <p className="text-lg sm:text-xl text-mewtwo-light max-w-4xl mx-auto mb-2 sm:mb-4 leading-relaxed px-4">
             En Nishi trabajamos de forma clara y colaborativa.
-          </motion.p>
-          <motion.p
-            variants={methodologyAnimations.stepCard}
-            className="text-lg sm:text-xl text-mewtwo-light max-w-4xl mx-auto mb-8 sm:mb-12 lg:mb-16 leading-relaxed px-4"
-          >
+          </p>
+          <p className="text-lg sm:text-xl text-mewtwo-light max-w-4xl mx-auto mb-8 sm:mb-12 lg:mb-16 leading-relaxed px-4">
             Te acompañamos en cada etapa para crear una web perfecta.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Steps Grid - Mobile optimized */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
           {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              variants={methodologyAnimations.stepCard}
-              whileHover={methodologyAnimations.stepCardHover}
-              className="relative group"
-            >
+            <div key={index} className="relative group">
               {/* Connection Line (only on desktop, between cards) */}
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-12 left-full w-8 h-px bg-gradient-to-r from-mewtwo-primary to-transparent z-0" />
@@ -150,27 +100,23 @@ const MethodologySection = () => {
               <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-mewtwo-primary/20 hover:border-mewtwo-secondary/40 transition-all duration-500 h-full">
                 {/* Step Number - Smaller on mobile */}
                 <div className="flex items-center justify-center mb-4 sm:mb-6">
-                  <motion.div
-                    {...methodologyAnimations.numberRotate}
+                  <div
                     className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}
                   >
                     <span className="text-white font-bold text-sm sm:text-base lg:text-lg">
                       {step.number}
                     </span>
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Icon - Smaller on mobile */}
                 <div className="flex justify-center mb-4 sm:mb-6">
-                  <motion.div
-                    {...methodologyAnimations.iconFloat(index * 0.2)}
-                    className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-mewtwo-primary/20"
-                  >
+                  <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-mewtwo-primary/20">
                     <step.icon
                       size={24}
                       className="sm:w-8 sm:h-8 text-mewtwo-secondary"
                     />
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Content - Smaller text on mobile */}
@@ -184,49 +130,32 @@ const MethodologySection = () => {
                 </div>
 
                 {/* Hover Effect */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileHover={{ opacity: 1, scale: 1 }}
-                  className="absolute top-2 sm:top-4 right-2 sm:right-4"
-                >
+                <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
                   <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-mewtwo-secondary shadow-lg" />
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* CTA Section - Mobile optimized */}
-        <motion.div
-          variants={methodologyAnimations.stepCard}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="text-center px-4"
-        >
-          <motion.div {...buttonAnimations.primary}>
+        <div className="text-center px-4">
+          <div>
             <Button variant="mewtwo-primary" size="xl" shape="pill">
               <span>Hablemos de tu idea</span>
-              <motion.div {...arrowAnimation}>
+              <div>
                 <ArrowRight size={20} />
-              </motion.div>
+              </div>
             </Button>
-          </motion.div>
+          </div>
 
-          <motion.p
-            variants={methodologyAnimations.stepCard}
-            className="text-mewtwo-light mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg"
-          >
+          <p className="text-mewtwo-light mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg">
             ¿Listo para comenzar? El primer paso es siempre una conversación.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Success Indicators - Mobile optimized */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto px-4"
-        >
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto px-4">
           {[
             {
               icon: CheckCircle,
@@ -259,7 +188,7 @@ const MethodologySection = () => {
               </p>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
