@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "pages:build": "npx @cloudflare/next-on-pages@1",
-    "pages:dev": "npx @cloudflare/next-on-pages@1 --dev"
+    "lint": "next lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
