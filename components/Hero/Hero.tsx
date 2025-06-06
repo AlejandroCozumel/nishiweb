@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
 import { ArrowRight, Play, Sparkles, Star, Zap, ChevronLeft, ChevronRight } from "lucide-react";
@@ -135,6 +134,18 @@ export default function HeroSection(): React.ReactElement {
   const heroRef = React.useRef<HTMLDivElement>(null);
   const isHeroInView: boolean = useInView(heroRef, { once: true });
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  // Detect mobile devices
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const mockProjects: MockProject[] = [
     {
@@ -162,6 +173,7 @@ export default function HeroSection(): React.ReactElement {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % mockProjects.length);
     }, 4000); // Change slide every 4 seconds
+
     return () => clearInterval(interval);
   }, [mockProjects.length]);
 
@@ -176,7 +188,6 @@ export default function HeroSection(): React.ReactElement {
   const getCardPosition = (index: number): number => {
     const diff = index - currentIndex;
     const totalCards = mockProjects.length;
-
     // Handle wrap-around cases
     if (diff > totalCards / 2) return diff - totalCards;
     if (diff < -totalCards / 2) return diff + totalCards;
@@ -189,7 +200,6 @@ export default function HeroSection(): React.ReactElement {
     position
   }) => {
     const isCenter = position === 0;
-
     return (
       <motion.div
         layout
@@ -217,32 +227,35 @@ export default function HeroSection(): React.ReactElement {
           }`}>
             {/* Card Content */}
             {isCenter ? (
-              // Center card with animated content
+              // Center card with optimized animations for mobile
               <>
                 <div className="aspect-[4/3] rounded-xl mb-4 relative overflow-hidden bg-gradient-to-br from-mewtwo-accent/80 to-mewtwo-dark/80">
                   <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-black/60 z-5" />
 
-                  <motion.div
-                    animate={{
-                      opacity: [0.2, 0.4, 0.2],
-                      scale: [1, 1.02, 1],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="absolute inset-0 bg-gradient-to-r from-mewtwo-primary/20 via-mewtwo-secondary/20 to-mewtwo-primary/20 rounded-xl z-10"
-                  />
+                  {/* Only animate subtle effects on desktop */}
+                  {!isMobile && (
+                    <motion.div
+                      animate={{
+                        opacity: [0.2, 0.4, 0.2],
+                        scale: [1, 1.02, 1],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute inset-0 bg-gradient-to-r from-mewtwo-primary/20 via-mewtwo-secondary/20 to-mewtwo-primary/20 rounded-xl z-10"
+                    />
+                  )}
 
                   <div className="absolute top-3 right-3 z-20">
                     <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{
+                      animate={!isMobile ? { rotate: 360 } : {}}
+                      transition={!isMobile ? {
                         duration: 8,
                         repeat: Infinity,
                         ease: "linear",
-                      }}
+                      } : {}}
                       className="w-6 h-6 bg-gradient-to-br from-mewtwo-secondary to-mewtwo-primary rounded-full flex items-center justify-center shadow-lg"
                     >
                       <Star size={12} className="text-white" />
@@ -251,12 +264,12 @@ export default function HeroSection(): React.ReactElement {
 
                   <div className="absolute bottom-3 left-3 z-20">
                     <motion.div
-                      animate={{ rotate: -360 }}
-                      transition={{
+                      animate={!isMobile ? { rotate: -360 } : {}}
+                      transition={!isMobile ? {
                         duration: 6,
                         repeat: Infinity,
                         ease: "linear",
-                      }}
+                      } : {}}
                       className="w-5 h-5 bg-gradient-to-br from-mewtwo-primary to-mewtwo-secondary rounded-full flex items-center justify-center shadow-lg"
                     >
                       <Zap size={10} className="text-white" />
@@ -266,32 +279,30 @@ export default function HeroSection(): React.ReactElement {
                   <div className="absolute inset-0 flex items-center justify-center z-30">
                     <div className="text-center relative px-4">
                       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm rounded-2xl -m-4" />
-
                       <div className="relative z-10">
                         <motion.div
-                          animate={{
+                          animate={!isMobile ? {
                             backgroundPosition: ["100% 50%", "0% 50%", "100% 50%"],
-                          }}
-                          transition={{
+                          } : {}}
+                          transition={!isMobile ? {
                             duration: 3,
                             repeat: Infinity,
                             ease: "easeInOut",
-                          }}
+                          } : {}}
                           className="text-lg sm:text-xl font-bold mb-2 bg-gradient-to-r from-white via-mewtwo-secondary to-white bg-[length:200%_100%] bg-clip-text text-transparent drop-shadow-lg"
                         >
                           Tu próximo
                         </motion.div>
-
                         <motion.div
-                          animate={{
+                          animate={!isMobile ? {
                             backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                          }}
-                          transition={{
+                          } : {}}
+                          transition={!isMobile ? {
                             duration: 3,
                             repeat: Infinity,
                             ease: "easeInOut",
                             delay: 0.5,
-                          }}
+                          } : {}}
                           className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-white via-mewtwo-primary to-white bg-[length:200%_100%] bg-clip-text text-transparent drop-shadow-lg"
                         >
                           proyecto aquí
@@ -300,7 +311,6 @@ export default function HeroSection(): React.ReactElement {
                     </div>
                   </div>
                 </div>
-
                 <h3 className="text-white font-semibold text-lg mb-2">
                   Proyecto Personalizado
                 </h3>
@@ -312,30 +322,29 @@ export default function HeroSection(): React.ReactElement {
               // Side cards with project images
               <>
                 <div className="aspect-[4/3] rounded-xl mb-4 relative overflow-hidden">
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.05, 1],
-                      opacity: [0.3, 0.5, 0.3]
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    className="absolute inset-0 bg-gradient-to-r from-mewtwo-primary/20 to-mewtwo-secondary/20 z-10"
-                  />
-
+                  {!isMobile && (
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.05, 1],
+                        opacity: [0.3, 0.5, 0.3]
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="absolute inset-0 bg-gradient-to-r from-mewtwo-primary/20 to-mewtwo-secondary/20 z-10"
+                    />
+                  )}
                   <motion.img
                     src={project.image}
                     alt={project.imageAlt || project.title}
                     className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    whileHover={!isMobile ? { scale: 1.05 } : {}}
+                    transition={!isMobile ? { type: "spring", stiffness: 300, damping: 25 } : {}}
                   />
-
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
-
                 <h3 className="text-white font-semibold text-lg mb-2">{project.title}</h3>
                 <p className="text-mewtwo-light text-sm leading-relaxed">{project.description}</p>
               </>
@@ -348,60 +357,54 @@ export default function HeroSection(): React.ReactElement {
 
   return (
     <section id="inicio" className="relative min-h-screen bg-gradient-to-br from-mewtwo-accent via-mewtwo-accent/90 to-mewtwo-dark overflow-hidden">
-      {/* Animated Background Elements */}
+      {/* Starry Sky Background - GIF or Static Image */}
       <div className="absolute inset-0">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
+        {/* Option 1: Animated starry sky GIF (replace with your GIF URL) */}
+        {/* <div
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: `url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3d2a3RxY295aGExejJmcTRhOXpzem9heGVhYnB1OWVxczVhcXYyMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3q2RgN7WUjeUUXm0/giphy.gif')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
           }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
+        /> */}
+
+        {/* Option 2: Static starry background as fallback */}
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                             radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                             radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                             radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                             radial-gradient(2px 2px at 160px 30px, #fff, transparent)`,
+            backgroundSize: '200px 100px',
+            backgroundRepeat: 'repeat'
           }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-mewtwo-primary/20 rounded-full blur-3xl"
         />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-mewtwo-primary/15 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            rotate: [0, -180, -360],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-mewtwo-primary/10 rounded-full blur-3xl"
-        />
+
+        {/* Subtle gradient overlay - only on desktop */}
+        {!isMobile && (
+          <div className="absolute inset-0 bg-gradient-to-r from-mewtwo-primary/5 via-transparent to-mewtwo-secondary/5" />
+        )}
       </div>
 
-      {/* Floating Particles */}
-      {[...Array(20)].map((_, i) => (
+      {/* Minimal floating particles - fewer on mobile */}
+      {[...Array(isMobile ? 5 : 8)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-mewtwo-secondary/30 rounded-full"
+          className="absolute w-1 h-1 bg-mewtwo-secondary/40 rounded-full"
           animate={{
-            x: [0, Math.random() * 100 - 50],
-            y: [0, Math.random() * 100 - 50],
-            opacity: [0, 1, 0],
+            x: [0, Math.random() * 50 - 25],
+            y: [0, Math.random() * 50 - 25],
+            opacity: [0, 0.6, 0],
           }}
           transition={{
-            duration: Math.random() * 5 + 5,
+            duration: Math.random() * 8 + 6,
             repeat: Infinity,
             delay: Math.random() * 5,
+            ease: "easeInOut"
           }}
           style={{
             left: `${Math.random() * 100}%`,
@@ -433,14 +436,14 @@ export default function HeroSection(): React.ReactElement {
           >
             <span className="text-white">Para tu </span>
             <motion.span
-              {...gradientTextAnimation.primary}
+              {...(isMobile ? {} : gradientTextAnimation.primary)}
               className="bg-gradient-to-r from-mewtwo-primary via-mewtwo-secondary to-mewtwo-primary bg-[length:200%_100%] bg-clip-text text-transparent"
             >
               próximo
             </motion.span>
             <br />
             <motion.span
-              {...gradientTextAnimation.secondary}
+              {...(isMobile ? {} : gradientTextAnimation.secondary)}
               className="bg-gradient-to-r from-mewtwo-secondary via-mewtwo-primary to-mewtwo-secondary bg-[length:200%_100%] bg-clip-text text-transparent"
             >
               proyecto
@@ -463,16 +466,15 @@ export default function HeroSection(): React.ReactElement {
             variants={textAnimationVariants.buttons}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
-            <motion.div {...buttonAnimations.primary}>
+            <motion.div {...(isMobile ? {} : buttonAnimations.primary)}>
               <Button variant="mewtwo-primary" size="xl" shape="pill">
                 <span>Empezar proyecto</span>
-                <motion.div {...arrowAnimation}>
+                <motion.div {...(isMobile ? {} : arrowAnimation)}>
                   <ArrowRight size={20} />
                 </motion.div>
               </Button>
             </motion.div>
-
-            <motion.div {...buttonAnimations.secondary}>
+            <motion.div {...(isMobile ? {} : buttonAnimations.secondary)}>
               <Button variant="mewtwo-outline" size="xl" shape="pill">
                 <Play size={20} />
                 <span>Ver nuestro trabajo</span>
